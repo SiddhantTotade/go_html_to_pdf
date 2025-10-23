@@ -1,0 +1,18 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Generated proto files
+*.pb.go
+*_grpc.pb.go
+
+# Go build artifacts
+*.test
+*.out
+
+# Go workspace file
+go.work
