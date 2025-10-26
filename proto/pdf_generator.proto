@@ -4,15 +4,9 @@ package certificate;
 
 option go_package = "github.com/SiddhantTotade/go_html_to_pdf/proto;pdf_generator";
 
-message Participant {
-  map<string, string> participant_details = 1;
-}
-
 message PDFRequest {
   string html_content = 1;
   string file_name = 2;
-  map<string, string> event_details = 3;
-  repeated Participant participants = 4;
 }
 
 message PDFResponse {
@@ -22,5 +16,5 @@ message PDFResponse {
 }
 
 service PDFGenerator {
-  rpc GeneratePDF (PDFRequest) returns (PDFResponse);
+  rpc GeneratePDF(PDFRequest) returns (PDFResponse);
 }
