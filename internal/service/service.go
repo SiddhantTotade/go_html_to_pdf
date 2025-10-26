@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/SiddhantTotade/go_html_to_pdf/internal/pdf"
@@ -22,7 +23,12 @@ func (s *PDFGeneratorServiceServer) GeneratePDF(ctx context.Context, req *pb.PDF
 		}, status.Error(codes.InvalidArgument, "HTML content cannot be empty")
 	}
 
-	pdfBytes, err := pdf.GeneratePDF(req.HtmlContent)
+	orientation := req.Orientation
+	if orientation != "landscape" && orientation != "portrait" {
+		orientation = "portrait"
+	}
+
+	pdfBytes, err := pdf.GeneratePDF(req.HtmlContent, orientation)
 	if err != nil {
 		log.Printf("Error generating PDF: %v", err)
 		return &pb.PDFResponse{
@@ -34,6 +40,6 @@ func (s *PDFGeneratorServiceServer) GeneratePDF(ctx context.Context, req *pb.PDF
 	return &pb.PDFResponse{
 		PdfData: pdfBytes,
 		Success: true,
-		Message: "PDF generated successfully",
+		Message: fmt.Sprintf("PDF generated successfully in %s mode", orientation),
 	}, nil
 }
