@@ -22,7 +22,7 @@ func main() {
 
 	pb.RegisterPDFGeneratorServer(grpcServer, &service.PDFGeneratorServiceServer{})
 
-	log.Println("✅ PDF gRPC server running on :50051")
+	log.Println("PDF gRPC server running on :50051")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}
